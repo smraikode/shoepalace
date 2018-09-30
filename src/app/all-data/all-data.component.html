@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Article Number</th>
+      <th scope="col">Brand Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Size</th>
+      <th scope="col">Price</th>
+      <th scope="col">quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <th scope="row">{{post.articleNo}}</th>
+      <td>{{post.brandName}}</td>
+      <td>{{post.type}}</td>
+      <td>{{post.size}}</td>
+      <td>{{post.price}}</td>
+      <td>{{post.quantity}}</td>
+    </tr>
+  </tbody>
+</table>
