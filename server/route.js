@@ -87,16 +87,25 @@ function insert(req, res) {
 
 function search(req, res) {
   const connection = getConnection()
-  const articleNo = req.body.articleNo
-  const queryString = "SELECT * FROM inventory WHERE articleNo = ?"
-  connection.query(queryString, [articleNo], (err, rows, fields) => {
+  const articleNo = req.body.articleNo;
+  let queryString;
+  let input_array = [];
+  if(req.body.size) {
+    const size = req.body.size;
+    queryString = "SELECT * FROM inventory WHERE articleNo = ? AND size = ?";
+    input_array = [articleNo, size];
+  } else {
+    queryString = "SELECT * FROM inventory WHERE articleNo = ?";
+    input_array = [articleNo];
+  }
+  connection.query(queryString, input_array, (err, rows, fields) => {
       if (err) {
         console.log("Failed to query for users: " + err)
         res.sendStatus(500)
         return
       // throw err
       } else {
-        res.json(rows)
+        res.send(rows)
       }
   })
 }
@@ -111,11 +120,51 @@ router.post('/checkAndInsert', (req, res) => {
     } else {
       search(req, res);
     }
-    
   } else {
     console.log("mela");
   }
 })
+
+router.post('/update', (req, res) => {
+  const connection = getConnection()
+  const articleNo = req.body.articleNo;
+  const size = req.body.size;
+  const newPrice = req.body.price;
+  const newQuantity = req.body.quantity;
+  const queryString = "SELECT * FROM inventory WHERE articleNo = ? AND size = ?"
+  connection.query(queryString, [articleNo, size], (err, rows, fields) => {
+      if (err) {
+        console.log("Failed to query for users: " + err)
+        res.sendStatus(500)
+        return
+      // throw err
+      } else {
+        setValue(rows[0])
+      }
+  })
+
+  function setValue(value) {
+    var varUpdate = value;
+    const oldPrice = varUpdate.price;
+    const oldQuantity = varUpdate.quantity;
+     console.log(newPrice);
+
+    const finalQuantity = parseInt(oldQuantity)  + parseInt(newQuantity);
+    const finalPrice = ((oldPrice * oldQuantity) + (newPrice * newQuantity))/(oldQuantity + newQuantity); 
+
+    const newQueryString = "UPDATE inventory SET price = ?, quantity= ? WHERE articleNo = ? AND size = ?";
+    connection.query(newQueryString, [finalPrice, finalQuantity, articleNo, size], (err, results, fields) => {
+      if (err) {
+        console.log("Failed to insert new user: " + err)
+        res.sendStatus(500);
+        return
+      } else {
+        res.status(200).send(results);
+      }
+      res.end()
+    })
+  }
+});
 
 router.get('/user/', (req, res) => {
     const connection = getConnection()
