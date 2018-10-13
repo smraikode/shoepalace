@@ -1,3 +1,5 @@
+<div class="insert__form">
+<h1 class="insert__form__title">Add Product Details</h1>
 <form (ngSubmit)="formSubmit(form)" #form="ngForm">
   <div class="form-group">
     <label for="Article No">Article Number</label>
@@ -23,11 +25,12 @@
     <label for="Quantity">Quantity</label>
     <input type="text" name="quantity" class="form-control" id="quantity" [(ngModel)]="data.quantity" placeholder="Insert Quantity">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary insert__btn">Submit</button>
 </form>
 <div *ngIf="successMsg" class="alert alert-success" role="alert">
   your data succesfully added
 </div>
 <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
   There is an error
+</div>
 </div>

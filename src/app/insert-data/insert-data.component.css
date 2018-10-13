@@ -1,0 +1,13 @@
+.insert__form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.insert__form__title {
+  margin: 20px 0;
+}
+
+.insert__btn {
+  background-color: #504F4F;
+  border: #504F4F;
+}

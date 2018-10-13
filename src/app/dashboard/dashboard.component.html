@@ -1,3 +1,30 @@
-<a href="/inventory" class="btn btn-primary">Inventory</a>
-<a href="/billing" class="btn btn-primary">Billing</a>
-<a href="/sales" class="btn btn-primary">Sales Reports</a>
+<section class="dashboard">
+  <div class="dashboard-wrapper">
+    <h1>Dashboard</h1>
+    <div class="dashboard-links">
+      <div class="inventory">
+        <div  class="dashboard-btns inventory">Inventory</div>
+        <ul class="inventory__items">
+          <li>
+            <i class="material-icons">remove_red_eye</i>
+            <a href="/search" class="">Show All Products</a>
+          </li>
+          <li>
+            <i class="material-icons">search</i>
+            <a href="/search" class="">Search Availability</a>
+          </li>
+          <li>
+            <i class="material-icons">update</i>                  
+            <a href="/update" class="">Update availability</a>
+          </li>
+          <li>
+            <i class="material-icons">note_add</i>                  
+            <a href="/insert" class="">Update Stock</a>
+          </li>
+        </ul>
+      </div>
+    <a href="/billing" class="dashboard-btns">Billing</a>
+    <a href="/sales" class="dashboard-btns">Sales Reports</a>
+    </div>
+  </div>
+</section>
