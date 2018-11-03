@@ -1,29 +1,28 @@
-<form (ngSubmit)="formSubmit()">
-  <div class="form-group">
-    <label for="Article No">Article Number</label>
-    <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.articleNo" aria-describedby="articleNo" placeholder="Insert Article No">
-   </div>
-  <button type="submit" class="btn btn-primary">Search</button>
-</form>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Article Number</th>
-      <th scope="col">Brand Name</th>
-      <th scope="col">Category</th>
-      <th scope="col">Size</th>
-      <th scope="col">Price</th>
-      <th scope="col">quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of res">
-      <th scope="row">{{item.articleNo}}</th>
-      <td>{{item.brandName}}</td>
-      <td>{{item.type}}</td>
-      <td>{{item.size}}</td>
-      <td>{{item.price}}</td>
-      <td>{{item.quantity}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container main">
+  <form (ngSubmit)="formSubmit()" class="row">
+    <div class="form-group col-6">
+      <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.articleNo" aria-describedby="articleNo" placeholder="Insert Article No">
+    </div>
+    <button type="submit" class="btn btn-primary col-3">Search</button>
+  </form>
+  <table class="table table-striped" *ngIf="showtable">
+    <thead>
+      <tr>
+        <th scope="col">Article Number</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Size</th>
+        <th scope="col">quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of res">
+        <th scope="row">{{item.articleNo}}</th>
+        <td>{{item.brandName}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.size}}</td>
+        <td>{{item.quantity}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

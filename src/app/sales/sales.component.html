@@ -1,3 +1,18 @@
-<p>
-  sales works!
-</p>
+<div class="container">
+  <form (ngSubmit)="formSubmit(date)" class="row">
+    <h2 class="col-12">Daily</h2>
+    <div class="form-group col-5">
+      <input type="date" name="date" class="form-control" id="date" [(ngModel)]="date">
+    </div>
+    <div class="col-3"></div>
+    <button type="submit" class="btn btn-primary col-4 pagination-centered">Search</button>
+  </form>
+  <form (ngSubmit)="formSubmit(date)" class="row">
+      <h2 class="col-12">Monthly</h2>
+      <div class="form-group col-5">
+        <input type="month" name="date" class="form-control" id="date" [(ngModel)]="date">
+      </div>
+      <div class="col-3"></div>
+      <button type="submit" class="btn btn-primary col-4 pagination-centered">Search</button>
+    </form>
+</div>

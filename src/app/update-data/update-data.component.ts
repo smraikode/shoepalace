@@ -32,6 +32,7 @@ export class UpdateDataComponent implements OnInit {
   }
 
   formUpdate(form1: NgForm) {
+    console.log(this.res.quantity);
     this.updateData.postFormData(this.res).subscribe(res=>{
       this.errorMsg = false;
       this.successMsg = true;

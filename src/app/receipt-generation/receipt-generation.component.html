@@ -1,0 +1,8 @@
+<div class="container main3">
+  <form (ngSubmit)="formSubmit()" class="row">
+    <div class="form-group col-6">
+      <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="res.billNo" aria-describedby="articleNo" placeholder="Insert Bill No">
+    </div>
+    <button type="submit" class="btn btn-primary col-3">Search</button>
+  </form>
+</div>

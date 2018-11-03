@@ -1,0 +1,19 @@
+.login {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #eee;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login .form {
+    position: absolute;
+    background: white;
+    box-shadow: 2px 2px 1px 5px #888888;
+    width: 40vw;
+    height: 40vh;
+    left: 30%;
+    top: 30%;
+    padding: 4% 10%;
+}

@@ -5,13 +5,12 @@ import { map } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
-export class FormSubmitService {
+export class InsertSellService {
 
-  data: any = {};
   constructor(private http: HttpClient) { }
 
   postFormData(data: any) {
-    return this.http.post('/checkAndInsert/', data).pipe(map((res) => {
+    return this.http.post('/insertSell/', data).pipe(map((res) => {
       return res;
     }));
   }

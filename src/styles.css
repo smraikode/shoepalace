@@ -1,1 +1,39 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
+
 /* You can add global styles to this file, and also import other style files */
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.main .header {
+    width: 100vw;
+    height: 10vh;
+    text-align: center;
+    background: #eee;
+    border-bottom: 3px solid gray;
+}
+
+.main .left-panel {
+    width: 15vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+    border-right: 3px solid gray;
+}
+
+.main .left-panel a {
+    margin: 10px;
+}
+
+.main .left-panel div {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .main-panel {
+    width: 80vw;
+}

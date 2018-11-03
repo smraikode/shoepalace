@@ -13,9 +13,11 @@ export class SearchDataComponent implements OnInit {
   ngOnInit() {
   }
   res: any = [];
+  showtable: boolean = false;
   formSubmit() {
     this.sendData.postFormData(this.data).subscribe(res=>{
       this.res = res;
+      this.showtable = true;
     },
     err => {
       alert('Please enter proper creadiancials');

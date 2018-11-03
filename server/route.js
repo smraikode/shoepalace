@@ -3,32 +3,11 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require("body-parser");
 const router = express.Router();
-const axios = require('axios'); 
 router.use(bodyParser.urlencoded({
   extended: true
 }));
 
 router.use(bodyParser.json());
-
-router.get("/users", (req, res) => {
-    const connection = getConnection()
-    const queryString = "SELECT * FROM inventory"
-    connection.query(queryString, (err, rows, fields) => {
-      if (err) {
-        console.log("Failed to query for users: " + err)
-        res.status(500).send(err).
-        return
-      }
-      res.status(200).json(rows);
-    //   axios.get(rows).then(posts=>{
-    //     res.status(200).json(rows);
-    //   })
-    //   .catch(error => {
-    //       res.status(500).send(error);
-    //   })
-    });
-    
-  })
 
 const pool = mysql.createPool({
     connectionLimit: 10,
@@ -41,6 +20,19 @@ const pool = mysql.createPool({
 function getConnection() {
     return pool
 }
+
+router.get("/users", (req, res) => {
+  const connection = getConnection()
+  const queryString = "SELECT * FROM inventory"
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.status(500).send(err).
+      return
+    }
+    res.status(200).json(rows);
+  });
+})
 
 function loginCheck(req, res) {
   const loginId = req.body.loginId
@@ -137,7 +129,6 @@ router.post('/update', (req, res) => {
         console.log("Failed to query for users: " + err)
         res.sendStatus(500)
         return
-      // throw err
       } else {
         setValue(rows[0])
       }
@@ -150,7 +141,7 @@ router.post('/update', (req, res) => {
      console.log(newPrice);
 
     const finalQuantity = parseInt(oldQuantity)  + parseInt(newQuantity);
-    const finalPrice = ((oldPrice * oldQuantity) + (newPrice * newQuantity))/(oldQuantity + newQuantity); 
+    const finalPrice = ((oldPrice * oldQuantity) + (newPrice * newQuantity))/finalQuantity; 
 
     const newQueryString = "UPDATE inventory SET price = ?, quantity= ? WHERE articleNo = ? AND size = ?";
     connection.query(newQueryString, [finalPrice, finalQuantity, articleNo, size], (err, results, fields) => {
@@ -185,6 +176,123 @@ router.get('/user/', (req, res) => {
 
         res.json(rows)
     })
+});
+
+router.post('/insertSell', (req, res) => {
+  const connection = getConnection();
+  const queryString0 = "SELECT billNo FROM bill WHERE billNo=(SELECT MAX(billNo) FROM bill)";
+  connection.query(queryString0, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for users: " + err)
+      res.status(500).send(err)
+      return
+    } else {
+      setLastBillNo(rows[0].billNo);
+    }
+  });
+  
+  function setLastBillNo(lastBillNo) {
+    let totalPurchase = 0, totalSell = 0, totalCgst = 0 , totalSgst = 0, totalSellPrice = 0, flag = false;
+    for(let i=0, len=req.body.length; i<len; i++) {
+      const queryString = "SELECT articleNo,quantity FROM inventory WHERE articleNo = ? AND size = ?";
+      connection.query(queryString,[req.body[i].articleNo, req.body[i].size], (err, rows, fields) => {
+        if (err) {
+          console.log("Failed to query for users: " + err)
+          res.status(500).send(err)
+          return
+        } else {
+          reduceQuantity(rows[0]);
+        }
+      });
+
+      const queryString1 = "INSERT INTO sell (billNo, articleNo, brandName, type, size, price, sellPrice, cgst, sgst, totalSellPrice, sellQuantity, sellDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+      let params = [lastBillNo, req.body[i].articleNo, req.body[i].brandName, req.body[i].type, req.body[i].size, req.body[i].price, req.body[i].sellPrice, req.body[i].cgst, req.body[i].sgst, req.body[i].totalPrice, req.body[i].sellQuantity];
+      connection.query(queryString1, params, (err, rows, fields) => {
+        if (err) {
+          console.log("Failed to query for users: " + err)
+          res.status(500).send(err)
+          return
+        } else {
+          sendFinalStatus(i , lastBillNo);
+        }
+      });
+      totalPurchase += req.body[i].price;
+      totalSell += req.body[i].sellPrice;
+      totalCgst += req.body[i].cgst;
+      totalSgst += req.body[i].sgst;
+      totalSellPrice += req.body[i].totalPrice;
+    }
+
+    const queryString2 = "INSERT INTO bill (billNo, purchasePrice, sellPrice, cgst, sgst, billDate) VALUES (?, ?, ?, ?, ?, NOW())";
+    let params = [lastBillNo + 1, totalPurchase, totalSell, totalCgst, totalSgst];
+    connection.query(queryString2, params, (err, rows, fields) => {
+      if (err) {
+        console.log("Failed to query for userss: " + err)
+        res.status(500).send(err)
+        return
+      } else {
+        res.status(200);
+      }
+    });
+  }
+  function reduceQuantity(data) {
+    let newQuantity = data.quantity - 1;
+    const queryString = "UPDATE inventory SET quantity = ? WHERE articleNo = ?";
+    connection.query(queryString, [newQuantity,data.articleNo], (err, rows, fields) => {
+      if(err) {
+        console.log("Failed to query for users: " + err)
+        res.status(500).send(err)
+        return
+      } else {
+        res.status(200);
+      }
+    });
+  }
+  function sendFinalStatus(itemNo, lastBillNo) {
+    if(itemNo == (req.body.length -1)) {
+      let data = {billNo: lastBillNo};
+      res.status(200).send(data);
+    }
+  }
 })
 
+router.post('/getReceipt', (req, res) => {
+  const connection = getConnection();
+  const queryString = "SELECT * FROM sell WHERE billNo = ?"
+  connection.query(queryString, [req.body.billNo], (err, rows, fields) => {
+    if(err) {
+      console.log("Failed to query for users: " + err)
+      res.status(500).send(err)
+      return
+    } else {
+      res.send(rows);
+    }
+  })
+});
+
+router.post('/report', (req, res) => {
+  console.log(req.body);
+  let fromDate, endDate;
+  if ((req.body.date.match(/-/g) || []).length == 2) {
+    fromDate = req.body.date;
+    endDate = fromDate + ' ' + '23:59:59';
+  } else {
+    fromDate = req.body.date + '-1';
+    endDate = req.body.date + '-31' + ' ' + '23:59:59';
+  }
+  
+  console.log(endDate);
+  const connection = getConnection();
+  const queryString = "SELECT * FROM sell WHERE sellDate BETWEEN ? AND ?";
+
+  connection.query(queryString, [fromDate, endDate], (err, rows, fields) => {
+    if(err) {
+      console.log("Failed to query for users: " + err)
+      res.status(500).send(err)
+      return
+    } else {
+      res.send(rows);
+    }
+  })
+});
 module.exports = router

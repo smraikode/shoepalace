@@ -1,11 +1,14 @@
-<form (ngSubmit)="formSubmit()">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="text" name="loginId" class="form-control" id="exampleInputEmail1"  [(ngModel)]="data.loginId" aria-describedby="emailHelp" placeholder="Enter email">
-   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="data.password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="login">
+  <form (ngSubmit)="formSubmit()" class="form container">
+    <fieldset>
+      <legend>Login:</legend>
+      <div class="form-group">
+        <input type="text" name="loginId" class="form-control" id="exampleInputEmail1"  [(ngModel)]="data.loginId" aria-describedby="emailHelp" placeholder="Enter user id">
+        </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="data.password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>
+</div>

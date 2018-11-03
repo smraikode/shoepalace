@@ -1,38 +1,39 @@
-<form (ngSubmit)="formSubmit(form)" #form="ngForm">
-  <div class="form-group">
-    <label for="Article No">Article Number</label>
-    <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.articleNo" aria-describedby="articleNo" placeholder="Insert Article No">
-   </div>
-   <div class="form-group">
-    <label for="Size">Size</label>
-    <input type="text" name="size" class="form-control" id="size" [(ngModel)]="data.size" placeholder="Insert Size">
+<div class="container main1">
+  <form (ngSubmit)="formSubmit(form)" #form="ngForm" class="row">
+    <div class="form-group col-5">
+      <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.articleNo" aria-describedby="articleNo" placeholder="Insert Article No">
+    </div>
+    <div class="form-group col-5">
+      <input type="text" name="size" class="form-control" id="size" [(ngModel)]="data.size" placeholder="Insert Size">
+    </div>
+    <div class="col-3"></div>
+    <button type="submit" class="btn btn-primary col-4 pagination-centered">Search</button>
+  </form>
+  <br>
+  <hr>
+  <form (ngSubmit)="formUpdate(form1)" *ngIf="formShown" #form1="ngForm">
+    <div class="form-group">
+      <label for="Article No">Article Number</label>
+      <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="res.articleNo" aria-describedby="articleNo" placeholder="Insert Article No" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Size">Size</label>
+      <input type="text" name="size" class="form-control" id="size" [(ngModel)]="res.size" placeholder="Insert Size" readonly>
+    </div>
+    <div class="form-group">
+      <label for="Price">Price</label>
+      <input type="text" name="price" class="form-control" id="price" [(ngModel)]="res.price" placeholder="Insert Price">
+    </div>
+    <div class="form-group">
+      <label for="Quantity">Quantity</label>
+      <input type="text" name="quantity" class="form-control" id="quantity" [(ngModel)]="res.quantity" placeholder="Insert Quantity">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div *ngIf="successMsg" class="alert alert-success" role="alert">
+    your data succesfully added
   </div>
-  <button type="submit" class="btn btn-primary">Search</button>
-</form>
-<br>
-<hr>
-<form (ngSubmit)="formUpdate(form1)"*ngIf="formShown" #form1="ngForm" >
-  <div class="form-group">
-    <label for="Article No">Article Number</label>
-    <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="res.articleNo" aria-describedby="articleNo" placeholder="Insert Article No" readonly>
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+    There is an error
   </div>
-  <div class="form-group">
-    <label for="Size">Size</label>
-    <input type="text" name="size" class="form-control" id="size" [(ngModel)]="res.size" placeholder="Insert Size" readonly>
-  </div>
-  <div class="form-group">
-    <label for="Price">Price</label>
-    <input type="text" name="price" class="form-control" id="price" [(ngModel)]="res.price" placeholder="Insert Price">
-  </div>
-  <div class="form-group">
-    <label for="Quantity">Quantity</label>
-    <input type="text" name="quantity" class="form-control" id="quantity" [(ngModel)]="res.quantity" placeholder="Insert Quantity">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<div *ngIf="successMsg" class="alert alert-success" role="alert">
-  your data succesfully added
-</div>
-<div *ngIf="errorMsg" class="alert alert-danger" role="alert">
-  There is an error
 </div>

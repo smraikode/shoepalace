@@ -1,0 +1,104 @@
+<div class="container block">
+    <div class="row invoice-header px-3 py-2">
+        <div class="col-6">
+        </div>
+      <div class="col-6 text-right address">
+        <p class="" style="margin-right: 15%;">!!श्री!!</p>
+        <p>Sharadchandra Pawar</p>
+        <p>Vyapari Sankul, Degloor</p>
+        <p>Dist. Nanded Pin: 431717</p>
+        <p>Phone No: 8975828555</p>
+      </div>
+    </div>
+  
+    <div class="invoice-content row px-5 pt-5">
+      <div class="col-7 row">
+        <h5 class="col-6 almost-gray mb-3">Customer Name:</h5>
+        <p class="col-6 gray-ish"></p>
+        <!-- <h5 class="col-6 almost-gray">Bill number:</h5>
+        <p class="col-6 gray-ish"># 123456789</p> -->
+      </div>
+      <div class="col-5 total-field row">
+        <div class="col-12 row due-date">
+          <h5 class="col-4 almost-gray">Date:</h5>
+          <p class="col-8 gray-ish">{{now | date:'medium'}}</p>
+        </div>
+        <!-- <div class="col-12 total-bill row">
+          <h5 class="col-4 almost-gray">GSTIN:</h5>
+          <p class="col-8 gray-ish"># 123456789011121</p>
+        </div> -->
+      </div>
+    </div>
+  
+    <div class="row mt-5">
+      <div class="col-12 invoice-table pt-1">
+        <table class="table table-hover">
+              <thead class="thead splitForPrint">
+                <tr>
+                  <th scope="col gray-ish">NO.</th>
+                  <th scope="col gray-ish">Item</th>
+                  <th scope="col gray-ish">Qty.</th>
+                  <th scope="col gray-ish">size</th>
+                  <th class="text-right" scope="col gray-ish">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of receipt; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td class="item">{{item.brandName}} {{item.type}}</td>
+                  <td>{{item.sellQuantity}}</td>
+                  <td>{{item.size}}</td>
+                  <td class="text-right">{{item.totalSellPrice}} <span class="currency">&#8360;</span></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  <div class="row invoice_details">
+     <!-- invoiced to details -->
+     <div class="col-6 pt-3">
+       <h4 class="gray-ish">Invoice Summary & Notes</h4>
+       <ul class="pt-3 almost-gray">
+            <li>
+                Declaration:- <br>
+                  We declare that, this invoice shows the actual price of the <br>
+                  goods described & that all particulars are true and correct.<br>
+            </li>
+            <li> All MRPs are inclusive of GST</li>
+            <li>Exchange within 7 days between 10am to 12 noon</li>
+            <li>No exchange without bill</li>
+            <li>No guarantee, no warranty</li>
+        </ul>
+     </div>
+     <!-- Invoice assets and total -->
+          <div class="col-6 mb-3 pr-4 sub-table">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <th scope="row gray-ish">Taxable amount</th>
+                  <td class="text-right">{{totals.totalSellPrice}} <span class="currency ">&#8360;</span></td>
+                </tr>
+                <tr>
+                  <th scope="row gray-ish">CGST</th>
+                  <td class="text-right">{{totals.totalcgst}} <span class="currency">&#8360;</span></td>
+                </tr>
+                <tr>
+                  <th scope="row gray-ish">SGST</th>
+                  <td class="text-right">{{totals.totalsgst}} <span class="currency">&#8360;</span></td>
+                </tr>
+                <tr class="last-row">
+                    <th scope="row"><h4>Total</h4></th>
+                    <td class="text-right"><h4><span class="currency">&#8360;</span> {{totals.totalPrice}}</h4></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+     </div>
+    <p class="text-center pb-3 thanks">
+      <span><strong><em>Thank you! Visit Again </em>😊</strong></span>
+    </p>
+    <p class="text-center pb-3 thanks">
+              Have a nice day <br>
+      Subject to the degloor jurisdiction <br>
+    </p>
+  </div>

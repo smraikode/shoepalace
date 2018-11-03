@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormSubmitService } from '../services_/form-submit.service';
 import { Router }  from '@angular/router';
-import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
   formSubmit() {
     this.sendData.postFormData(this.data).subscribe(res=>{
-      this.router.navigate(['/dashboard']); 
+      this.router.navigate(['/sell']); 
     },
     err => {
       alert('Please enter proper creadiancials');
