@@ -2,7 +2,7 @@
   <h3>Search</h3>
   <form (ngSubmit)="formSubmit(form)" #form="ngForm">
     <div class="form-group">
-      <label for="Article No">Article Number</label>
+      <label for="Article No">Brand Name</label>
       <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.articleNo" aria-describedby="articleNo" placeholder="Insert Article No">
     </div>
     <div class="form-group">
@@ -13,7 +13,7 @@
   </form>
   <br>
   <hr>
-  <div *ngIf="res">
+  <!-- <div *ngIf="false">
     <h3>Add</h3>
     <table class="table table-striped">
       <thead>
@@ -36,7 +36,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
   <div *ngIf="sellitems">
     <h3>Confirm</h3>
     <form (ngSubmit)="insertSell()" #form="ngForm">

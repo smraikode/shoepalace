@@ -16,21 +16,25 @@ export class SellComponent implements OnInit {
   ngOnInit() {
   }
   res: any;
+  sellitems: any;
   formSubmit(form: NgForm) {
     this.sendData.postFormData(this.data).subscribe(res=>{
       this.res = res[0];
+      this.sellitems = this.res;
+      this.sellitems.sellQuantity = 1;
+      this.res = null;
       form.reset();
     },
     err => {
       alert('Please enter appropriate details');
     });
   }
-  sellitems: any;
-  selectProduct() {
-    this.sellitems = this.res;
-    this.sellitems.sellQuantity = 1;
-    this.res = null;
-  }
+
+  // selectProduct() {
+  //   this.sellitems = this.res;
+  //   this.sellitems.sellQuantity = 1;
+  //   this.res = null;
+  // }
 
   finalOrder: any = [];
   insertSell() {

@@ -141,7 +141,7 @@ router.post('/update', (req, res) => {
      console.log(newPrice);
 
     const finalQuantity = parseInt(oldQuantity)  + parseInt(newQuantity);
-    const finalPrice = ((oldPrice * oldQuantity) + (newPrice * newQuantity))/finalQuantity; 
+    const finalPrice = oldPrice>newPrice? oldPrice: newPrice; 
 
     const newQueryString = "UPDATE inventory SET price = ?, quantity= ? WHERE articleNo = ? AND size = ?";
     connection.query(newQueryString, [finalPrice, finalQuantity, articleNo, size], (err, results, fields) => {
