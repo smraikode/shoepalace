@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+
+
+  <div class="main">
+      <div class="header">
+        <h1 class="text-ceter">Main Panel</h1>
+      </div>
+      <div class="left-panel">
+        <div>
+          <h3>Inventory</h3>
+          <a href="/search" class="btn btn-primary">Search</a>
+          <a href="/update" class="btn btn-primary">Update Stock</a>
+          <a href="/insert" class="btn btn-primary">Insert Stock</a>
+          <a href="/showAll" class="btn btn-primary">Show All</a>
+        </div>
+        <div>
+          <h3>Selling</h3>
+          <a href="/sell" class="btn btn-primary">Sell</a>
+          <a href="/dublicate-receipt" class="btn btn-primary">receipt</a>
+        </div>
+        <div>
+          <h3>Reports</h3>
+          <a href="/sales" class="btn btn-primary">Sales Reports</a>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+  </div>

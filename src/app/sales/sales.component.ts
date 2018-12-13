@@ -14,6 +14,7 @@ export class SalesComponent implements OnInit {
 
   ngOnInit() {
   }
+  date:any;
   data: any;
   res: any;
   formSubmit(date) {

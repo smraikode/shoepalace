@@ -14,7 +14,8 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'shri',
-    database: 'shoepalace'
+    database: 'shoepalace',
+    multipleStatements: true,
 })
 
 function getConnection() {
@@ -295,4 +296,22 @@ router.post('/report', (req, res) => {
     }
   })
 });
+
+router.post('/delete', (req, res) => {
+  console.log(req.body);
+  
+  const connection = getConnection();
+  const queryString = "delete from bill where billNo=?;SET @num := 0; UPDATE bill SET billNo = @num := (@num+1);ALTER TABLE bill AUTO_INCREMENT = 1;";
+
+  connection.query(queryString, [fromDate, endDate], (err, rows, fields) => {
+    if(err) {
+      console.log("Failed to query for users: " + err)
+      res.status(500).send(err)
+      return
+    } else {
+      res.send(rows);
+    }
+  })
+});
+
 module.exports = router

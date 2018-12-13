@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormSubmitService } from '../services_/form-submit.service';
 import { NgForm } from '@angular/forms';
+import {SelectModule} from 'ng2-select';
 
 @Component({
   selector: 'app-insert-data',
@@ -91,5 +92,35 @@ export class InsertDataComponent implements OnInit {
       this.successMsg = false;
       this.errorMsg = true;
     });
+  }
+
+
+    private value:any = {};
+  private _disabledV:string = '0';
+  private disabled1:boolean = false;
+ 
+  private get disabledV():string {
+    return this._disabledV;
+  }
+ 
+  private set disabledV(value:string) {
+    this._disabledV = value;
+    this.disabled1 = this._disabledV === '1';
+  }
+ 
+  public selected(value:any):void {
+    console.log('Selected value is: ', value);
+  }
+ 
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+ 
+  public typed(value:any):void {
+    console.log('New search input: ', value);
+  }
+ 
+  public refreshValue(value:any):void {
+    this.value = value;
   }
 }

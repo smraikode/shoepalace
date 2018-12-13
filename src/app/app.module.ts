@@ -4,7 +4,7 @@ import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 
 import { AppComponent } from './app.component';
 import { AllDataComponent } from './all-data/all-data.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
@@ -17,9 +17,11 @@ import { RecieptComponent } from './reciept/reciept.component';
 import { ReceiptGenerationComponent } from './receipt-generation/receipt-generation.component';
 import { FilterPipe} from './insert-data/filter.pipe';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DeleteComponent } from './delete/delete.component';
+import {SelectModule} from 'ng2-select';
 
 
-const routes = [
+const routes: Routes = [
   {
     path: 'receipt',
     component: RecieptComponent
@@ -64,6 +66,11 @@ const routes = [
     pathMatch: 'full',
     component: SellComponent
   },
+  {
+    path: 'delete',
+    pathMatch: 'full',
+    component: DeleteComponent
+  },
 ]
 
 @NgModule({
@@ -78,7 +85,8 @@ const routes = [
     SellComponent,
     RecieptComponent,
     ReceiptGenerationComponent,
-    FilterPipe
+    FilterPipe,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +94,8 @@ const routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     DlDateTimePickerDateModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    SelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

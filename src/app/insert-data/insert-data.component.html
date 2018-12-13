@@ -2,7 +2,7 @@
   <form (ngSubmit)="formSubmit(form)" #form="ngForm">
     <div class="form-group">
       <label for="Article No">Article Number</label>
-      <input type="text" name="articleNo" class="form-control" id="articleNo"  [(ngModel)]="data.articleNo" aria-describedby="emailHelp" placeholder="Insert Article No">
+      <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.articleNo" aria-describedby="emailHelp" placeholder="Insert Article No">
     </div>
     <div class="form-group">
       <label for="BrandName">Brand Name</label>
@@ -10,14 +10,27 @@
     </div>
     <div class="form-group">
       <label for="Category">Category</label>
-      <ng-multiselect-dropdown
-        name="city"
-        [data]="cities"
-        [(ngModel)]="data.type"
-        [settings]="dropdownSettings"
-        (onSelect)="onItemSelect($event)"
-        [disabled]="disabled">
-      </ng-multiselect-dropdown>
+      <div style="width: 300px; margin-bottom: 20px;">
+        <ng-select [allowClear]="true"
+                    [items]="cities"
+                    [disabled]="disabled"
+                    (data)="refreshValue($event)"
+                    (selected)="selected($event)"
+                    (removed)="removed($event)"
+                    (typed)="typed($event)"
+                    placeholder="No city selected"
+                    name="select">
+        </ng-select>
+        <p></p>
+        <pre>{{value.text}}</pre>
+        <div>
+          <button type="button" class="btn btn-primary"
+                  [(ngModel)]="disabledV" btnCheckbox
+                  btnCheckboxTrue="1" btnCheckboxFalse="0">
+            {{disabled1 === '1' ? 'Enable' : 'Disable'}}
+          </button>
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="Size">Size</label>
