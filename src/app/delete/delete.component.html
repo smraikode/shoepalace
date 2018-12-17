@@ -1,0 +1,8 @@
+<div class="container main">
+  <form (ngSubmit)="formSubmit()" class="row">
+    <div class="form-group col-6">
+      <input type="text" name="articleNo" class="form-control" id="articleNo" [(ngModel)]="data.BillNo" aria-describedby="articleNo" placeholder="Insert Bill No">
+    </div>
+    <button type="submit" class="btn btn-primary col-3">Delete</button>
+  </form>
+</div>

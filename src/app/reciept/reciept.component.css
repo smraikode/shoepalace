@@ -73,7 +73,7 @@
   div.container{
     background-color: white;
     border-radius: 10px;
-    height: 100%;
+    height: auto;
     position: relative;
     margin-top: 50px;
   }
@@ -127,6 +127,8 @@
   }
   div.block {
     border: 1px solid;
+    width: 80vw;
+    margin-left: 3%;
   }
 
   div.due-date{

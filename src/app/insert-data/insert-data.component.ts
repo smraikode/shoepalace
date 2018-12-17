@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormSubmitService } from '../services_/form-submit.service';
 import { NgForm } from '@angular/forms';
 
+export interface sizePair {
+  size: string;
+  quantity: string;
+}
+
 @Component({
   selector: 'app-insert-data',
   templateUrl: './insert-data.component.html',
@@ -16,6 +21,8 @@ export class InsertDataComponent implements OnInit {
   dropdownSettings: any = {};
   closeDropdownSelection=false;
   disabled=false;
+  fieldArray: any = [];
+  newAttribute: any = {};
 
   ngOnInit() {
     this.cities = [
@@ -81,15 +88,30 @@ export class InsertDataComponent implements OnInit {
     console.log('onItemSelect', item);
   }
 
+  sqdata: any = [];
+    addFieldValue() {
+        this.fieldArray.push(this.newAttribute);
+        this.newAttribute = {};
+    }
+
+    deleteFieldValue(index) {
+        this.fieldArray.splice(index, 1);
+    }
   formSubmit(form: NgForm) {
-    this.sendData.postFormData(this.data).subscribe(res=>{
-      this.errorMsg = false;
-      this.successMsg = true;
-      form.resetForm();
-    },
-    err => {
-      this.successMsg = false;
-      this.errorMsg = true;
-    });
+
+    for(let i=0; i<this.fieldArray.length;i++) {
+      this.data.size = this.fieldArray[i].size;
+      this.data.quantity = this.fieldArray[i].quantity;
+      console.log(this.data);
+      this.sendData.postFormData(this.data).subscribe(res=>{
+        this.errorMsg = false;
+        this.successMsg = true;
+        form.resetForm();
+      },
+      err => {
+        this.successMsg = false;
+        this.errorMsg = true;
+      });
+    }
   }
 }
