@@ -21,8 +21,7 @@ export class InsertDataComponent implements OnInit {
   dropdownSettings: any = {};
   closeDropdownSelection=false;
   disabled=false;
-  fieldArray: any = [];
-  newAttribute: any = {};
+
 
   ngOnInit() {
     this.cities = [
@@ -87,11 +86,15 @@ export class InsertDataComponent implements OnInit {
   onItemSelect(item: any) {
     console.log('onItemSelect', item);
   }
-
-  sqdata: any = [];
+  fieldArray: any = [];
+  newAttribute: any = {};
     addFieldValue() {
         this.fieldArray.push(this.newAttribute);
+        console.log(this.fieldArray);
+        console.log(this.fieldArray);
+
         this.newAttribute = {};
+        console.log(this.newAttribute);
     }
 
     deleteFieldValue(index) {
