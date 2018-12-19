@@ -24,6 +24,15 @@ export class InsertDataComponent implements OnInit {
 
 
   ngOnInit() {
+
+    var secondinput = document.getElementById("brandName");
+
+    // secondinput.addEventListener("focusout", function() {
+    //   console.log("inside focus out");
+    //   console.log(document.querySelector(".dropdown-list"));
+    //   document.querySelector(".dropdown-list").removeAttribute("hidden");
+    // }, false);
+
     this.cities = [
       "   Gents",
       "G-Canvas Shoe",
@@ -90,11 +99,9 @@ export class InsertDataComponent implements OnInit {
   newAttribute: any = {};
     addFieldValue() {
         this.fieldArray.push(this.newAttribute);
-        console.log(this.fieldArray);
-        console.log(this.fieldArray);
-
         this.newAttribute = {};
-        console.log(this.newAttribute);
+        document.getElementById("newAttributeCode").focus();
+
     }
 
     deleteFieldValue(index) {
