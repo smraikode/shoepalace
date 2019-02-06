@@ -1,5 +1,6 @@
 * {
     -webkit-print-color-adjust:exact;
+    font-weight: 700;
 }
 
 @page {
@@ -90,7 +91,7 @@
   
   div.invoice-header > div > p{
     font-size: 1.2rem;
-    font-weight: 350;
+    font-weight: 700;
   }
 
   .address p {
@@ -151,7 +152,6 @@
   
   tr.last-row{
     margin-top: 25px;
-    background-color: #eee;
     color: black;
     border-top: 3px solid gray;
   }

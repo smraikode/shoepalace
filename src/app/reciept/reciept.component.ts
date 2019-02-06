@@ -21,6 +21,9 @@ export class RecieptComponent implements OnInit {
   };
   now: Date = new Date();
   ngOnInit() {
+
+    document.querySelector(".header").classList.add("hide");
+    document.querySelector(".left-panel").classList.add("hide");
     this.billNo = {
       billNo: this.route.snapshot.paramMap.get('billNo')
     };

@@ -1,7 +1,7 @@
 <div class="container block">
     <div class="row invoice-header px-3 py-2">
       <div class="col-6 address">
-        <p class="" style="margin-left: 15%;">!!श्री!!</p>
+        <p class="" style="margin-left: 15%;font-weight: 700;">!!श्री!!</p>
         <p>Sharadchandra Pawar</p>
         <p>Vyapari Sankul, Degloor</p>
         <p>Dist. Nanded Pin: 431717</p>
@@ -13,15 +13,15 @@
   
     <div class="invoice-content row px-5 pt-5">
       <div class="col-7 row">
-        <h5 class="col-6 almost-gray mb-3">Customer Name:</h5>
-        <p class="col-6 gray-ish"></p>
+        <h5 class="col-6 mb-3">Customer Name:</h5>
+        <p class="col-6"></p>
         <!-- <h5 class="col-6 almost-gray">Bill number:</h5>
         <p class="col-6 gray-ish"># 123456789</p> -->
       </div>
       <div class="col-5 total-field row">
         <div class="col-12 row due-date">
-          <h5 class="col-4 almost-gray">Date:</h5>
-          <p class="col-8 gray-ish">{{now | date:'medium'}}</p>
+          <h5 class="col-4">Date:</h5>
+          <p class="col-8">{{now | date:'medium'}}</p>
         </div>
         <!-- <div class="col-12 total-bill row">
           <h5 class="col-4 almost-gray">GSTIN:</h5>
@@ -35,11 +35,11 @@
         <table class="table table-hover">
               <thead class="thead splitForPrint">
                 <tr>
-                  <th scope="col gray-ish">NO.</th>
-                  <th scope="col gray-ish">Item</th>
-                  <th scope="col gray-ish">Qty.</th>
-                  <th scope="col gray-ish">size</th>
-                  <th class="text-right" scope="col gray-ish">Total</th>
+                  <th scope="col">NO.</th>
+                  <th scope="col">Item</th>
+                  <th scope="col">Qty.</th>
+                  <th scope="col">size</th>
+                  <th class="text-right" scope="col">Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,8 +57,8 @@
   <div class="row invoice_details">
      <!-- invoiced to details -->
      <div class="col-6 pt-3">
-       <h4 class="gray-ish">Invoice Summary & Notes</h4>
-       <ul class="pt-3 almost-gray">
+       <h4 class="">Invoice Summary & Notes</h4>
+       <ul class="pt-3">
             <li>
                 Declaration:- <br>
                   We declare that, this invoice shows the actual price of the <br>
@@ -75,15 +75,15 @@
             <table class="table table-borderless">
               <tbody>
                 <tr>
-                  <th scope="row gray-ish">Taxable amount</th>
+                  <th scope="row">Taxable amount</th>
                   <td class="text-right">{{totals.totalSellPrice}} <span class="currency ">&#8360;</span></td>
                 </tr>
                 <tr>
-                  <th scope="row gray-ish">CGST</th>
+                  <th scope="row">CGST</th>
                   <td class="text-right">{{totals.totalcgst}} <span class="currency">&#8360;</span></td>
                 </tr>
                 <tr>
-                  <th scope="row gray-ish">SGST</th>
+                  <th scope="row">SGST</th>
                   <td class="text-right">{{totals.totalsgst}} <span class="currency">&#8360;</span></td>
                 </tr>
                 <tr class="last-row">
